@@ -3,17 +3,18 @@ This is a Client + Server Side Signup/Signin Authorization project. I'm showing 
 ```    
 Client: Form validation and authenticated API requests. Custom HOC.  
 ```
+```
 Server: Passport Strategies with JWT Tokens. Bcrypt password hashing. MongoDB localy wired.    
 ```
 
-### Client Side 
+# Client Side 
 
     -   React + Redux
     -   ReduxForm Validation
     -   ReduxThunk Middleware
     -   HOC Authentication Wrapper
 
-### Server Side 
+# Server Side 
 
     -   NodeJS (Express)
     -   MongoDB (Mongoose)
