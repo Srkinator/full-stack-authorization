@@ -1,25 +1,22 @@
-# ReduxSimpleStarter
-
-Interested in learning [Redux](https://www.udemy.com/react-redux/)?
-
-### Getting Started
-
-There are two methods for getting started with this repo.
-
-#### Familiar with Git?
-Checkout this repo, install dependencies, then start the gulp process with the following:
-
+# Fullstack Authorization Project
+This is a Client + Server Side Signup/Signin Authorization project. I'm showing the usage of encrypted passwords and tokens used to authenticate requests, consumed by React/Redux application. 
+```    
+Client: Form validation and authenticated API requests. Custom HOC.  
 ```
-> git clone https://github.com/StephenGrider/ReduxSimpleStarter.git
-> cd ReduxSimpleStarter
-> npm install
-> npm start
+Server: Passport Strategies with JWT Tokens. Bcrypt password hashing. MongoDB localy wired.    
 ```
 
-#### Not Familiar with Git?
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
+### Client Side 
 
-```
-> npm install
-> npm start
-```
+    -   React + Redux
+    -   ReduxForm Validation
+    -   ReduxThunk Middleware
+    -   HOC Authentication Wrapper
+
+### Server Side 
+
+    -   NodeJS (Express)
+    -   MongoDB (Mongoose)
+    -   JSON Web Token
+    -   PassportJS
+    -   Bcrypt
