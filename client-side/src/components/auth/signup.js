@@ -3,12 +3,8 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-class Signin extends Component {
-    handleFormSubmit = ({ email, password }) => {
-        this.props.signinUser({ email, password });
-    };
-
-    fieldHelper = ({ input, type, label, meta: { touched, error } }) => (
+class Signup extends Component {
+    formHelper = ({ label, input, type, meta: { touched, error } }) => (
         <div>
             <label>{label}</label>
             <input {...input} type={type} className="form-control" />
@@ -16,48 +12,60 @@ class Signin extends Component {
         </div>
     );
 
+    onFormSubmit = ({ email, password }) => {
+        this.props.signupUser({ email, password });
+    };
+
     renderAlert() {
         if (this.props.errorMessage) {
             return (
                 <div className="alert alert-danger">
-                    <strong>Oops!</strong> {this.props.errorMessage}
+                    <strong>Oops! </strong>
+                    {this.props.errorMessage}
                 </div>
             );
         }
-        return null;
     }
 
     render() {
         const { handleSubmit } = this.props;
 
         return (
-            <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+            <form onSubmit={handleSubmit(this.onFormSubmit)}>
                 <fieldset className="form-group">
                     <Field
                         type="email"
                         name="email"
                         label="Email"
-                        component={this.fieldHelper}
+                        component={this.formHelper}
                     />
                 </fieldset>
                 <fieldset className="form-group">
                     <Field
                         type="password"
                         name="password"
-                        label="Password"
-                        component={this.fieldHelper}
+                        label="Passoword"
+                        component={this.formHelper}
+                    />
+                </fieldset>
+                <fieldset className="form-group">
+                    <Field
+                        type="password"
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        component={this.formHelper}
                     />
                 </fieldset>
                 {this.renderAlert()}
                 <button action="submit" className="btn btn-primary">
-                    Sing in
+                    Sign Up
                 </button>
             </form>
         );
     }
 }
 
-const validate = ({ email, password }) => {
+const validate = ({ email, password, confirmPassword }) => {
     const errors = {};
 
     if (!email) {
@@ -66,15 +74,22 @@ const validate = ({ email, password }) => {
     if (!password) {
         errors.password = 'Password is required!';
     }
+    if (password && password.length < 6) {
+        errors.password = 'Password should have 6 or more characters';
+    }
+    if (!confirmPassword) {
+        errors.confirmPassword = 'Please confirm your password!';
+    }
+    if (password !== confirmPassword) {
+        errors.password = 'Passwords must match!';
+    }
 
     return errors;
 };
 
-const mapStateToProps = ({ auth }) => ({
-    errorMessage: auth.error
-});
+const mapStateToProps = ({ auth }) => ({ errorMessage: auth.error });
 
 export default reduxForm({
-    form: 'signin',
+    form: 'signup',
     validate
-})(connect(mapStateToProps, actions)(Signin));
+})(connect(mapStateToProps, actions)(Signup));
